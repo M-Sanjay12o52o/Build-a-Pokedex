@@ -1,18 +1,40 @@
 import { commandExit } from "./command_exit.js";
 import { commandHelp } from "./command_help.js";
-import type { CLICommand, State } from "./state.js";
+import { commandMap } from "./command_map.js";
+import { commandMappd } from "./command_mappd.js";
+import type { CLICommand } from "./state.js";
 
 export function getCommands(): Record<string, CLICommand> {
   return {
     exit: {
       name: "exit",
       description: "Exits the pokedex",
-      callback: commandExit,
+      callback: async (state) => {
+        await commandExit(state);
+      },
     },
     help: {
       name: "help",
       description: "Welcome message and list of commands",
-      callback: commandHelp,
+      callback: async (state) => {
+        await commandHelp(state);
+      },
+    },
+    map: {
+      name: "map",
+      description:
+        "Displays the names of 20 location areas in the Pokemon world.",
+      callback: async (state) => {
+        await commandMap(state);
+      },
+    },
+    mapb: {
+      name: "mapb",
+      description:
+        "Displays the names of 20 location areas in the Pokemon world that was returned previously using the map",
+      callback: async (state) => {
+        await commandMappd(state);
+      },
     },
   };
 }
