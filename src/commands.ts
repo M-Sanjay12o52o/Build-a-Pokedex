@@ -5,6 +5,7 @@ import { commandMapb } from "./command_mapb.js";
 import { commandCatch } from "./commandCatch.js";
 import { explore } from "./explore.js";
 import { commandInspect } from "./commandInspect.js";
+import { commandPokedex } from "./commandPokedex.js";
 import type { CLICommand } from "./state.js";
 
 export function getCommands(): Record<string, CLICommand> {
@@ -65,6 +66,13 @@ export function getCommands(): Record<string, CLICommand> {
         "This takes the name of a Pokemon and prints the name, weight, stats and type(s) of the Pokemon. If it's caught",
       callback: async (state, name) => {
         await commandInspect(state, name);
+      },
+    },
+    pokedex: {
+      name: "pokedex",
+      description: "Lists all the names of the Pokemon the user has caught",
+      callback: async (state, name) => {
+        await commandPokedex(state);
       },
     },
   };
