@@ -36,4 +36,18 @@ export class PokeAPI {
         this.cache.add(fullUrl, data);
         return data;
     }
+    async fetchPokemon(pokemon) {
+        const fullUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
+        console.log("fullUrl: ", fullUrl);
+        const cached = this.cache.get(fullUrl);
+        if (cached)
+            return cached.val;
+        const result = await fetch(fullUrl);
+        if (!result.ok) {
+            throw new Error(`HTTP error! status: ${result.status}`);
+        }
+        const data = await result.json();
+        this.cache.add(fullUrl, data);
+        return data;
+    }
 }

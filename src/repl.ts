@@ -1,3 +1,4 @@
+import { commandCatch } from "./commandCatch.js";
 import { explore } from "./explore.js";
 import { State } from "./state.js";
 
@@ -10,7 +11,6 @@ export function startREPL(state: State) {
   rl.prompt();
 
   rl.on("line", async (input) => {
-    // const cleanInputResult = cleanInput(input);
     const [commandName, ...args] = cleanInput(input);
 
     if (!commandName) {
@@ -18,14 +18,7 @@ export function startREPL(state: State) {
       return;
     }
 
-    // if (cleanInputResult.length == 0) {
-    //   rl.prompt();
-    //   return;
-    // }
-
     const commands = state.commands;
-    // const commandName = cleanInputResult[0].toLocaleLowerCase();
-    // const command = commands[commandName];
     const command = commands[commandName.toLowerCase()];
 
     if (!command) {
@@ -38,7 +31,7 @@ export function startREPL(state: State) {
 
     try {
       if (command.name === "explore") {
-        if (arguments.length === 0) {
+        if (args.length === 0) {
           console.log(
             "Please provide a location name, e.g., explore canalave-city-area"
           );
@@ -48,6 +41,17 @@ export function startREPL(state: State) {
         await explore(state, args[0]);
         return;
       }
+
+      if (command.name === "catch") {
+        if (args.length === 0) {
+          console.log("Please provide a pokemon name, e.g., catch pikachu");
+          rl.prompt();
+          return;
+        }
+        await commandCatch(state, args[0]);
+        return;
+      }
+
       await command.callback(state);
     } catch (error) {
       console.log(error);

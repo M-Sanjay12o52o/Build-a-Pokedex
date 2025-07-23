@@ -17,5 +17,6 @@ export function initState() {
         api,
         nextLocationsURL,
         prevLocationsURL,
+        pokedex: {},
     };
 }
