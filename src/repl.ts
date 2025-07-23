@@ -34,6 +34,6 @@ export function startREPL(state: State) {
       console.log(error);
     }
 
-    rl.prompt();
+    // rl.prompt();
   });
 }

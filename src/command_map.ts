@@ -17,17 +17,15 @@ const api = new PokeAPI();
 // Using the state helped here
 
 export async function commandMap(state: State) {
-  const currentURL = state.nextLocationsURL;
   const fetchLocationsResult = await api.fetchLocations(state.nextLocationsURL);
   const locations: Location[] = fetchLocationsResult.results;
 
+  state.prevLocationsURL = fetchLocationsResult.previous;
+  state.nextLocationsURL = fetchLocationsResult.next;
+
   for (const location of locations) {
     console.log(location.name);
-
-    // Update the prevLocationURL with what ever the url that was used to fetch locations here
-    state.prevLocationsURL = currentURL;
-
-    state.nextLocationsURL = fetchLocationsResult.next;
   }
+
   state.readline.prompt();
 }
