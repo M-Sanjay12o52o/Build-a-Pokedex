@@ -1,4 +1,5 @@
 import { commandCatch } from "./commandCatch.js";
+import { commandInspect } from "./commandInspect.js";
 import { explore } from "./explore.js";
 import { State } from "./state.js";
 
@@ -49,6 +50,16 @@ export function startREPL(state: State) {
           return;
         }
         await commandCatch(state, args[0]);
+        return;
+      }
+
+      if (command.name === "inspect") {
+        if (args.length === 0) {
+          console.log("Please provide a pokemon name, e.g., inspect pikachu");
+          rl.prompt();
+          return;
+        }
+        await commandInspect(state, args[0]);
         return;
       }
 

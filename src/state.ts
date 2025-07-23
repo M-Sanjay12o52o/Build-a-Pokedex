@@ -10,6 +10,14 @@ export type Pokemon = {
   url: string;
 };
 
+export type CaughtPokemon = {
+  name: string;
+  height: string;
+  weight: string;
+  stats: string;
+  types: string;
+};
+
 export type State = {
   readline: Interface;
   commands: Commands;
