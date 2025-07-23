@@ -24,6 +24,5 @@ export function startREPL(state) {
         catch (error) {
             console.log(error);
         }
-        // rl.prompt();
     });
 }

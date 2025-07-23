@@ -33,7 +33,5 @@ export function startREPL(state: State) {
     } catch (error) {
       console.log(error);
     }
-
-    // rl.prompt();
   });
 }
