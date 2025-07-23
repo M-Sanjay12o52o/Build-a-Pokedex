@@ -42,11 +42,4 @@ export class Cache {
         clearInterval(this.#reapIntervalId);
         this.#reapIntervalId = undefined;
     }
-    // FOR TESTING
-    dumpCacheForTest() {
-        return this.#cache;
-    }
-    addFakeEntryForTest(key, entry) {
-        this.#cache.set(key, entry);
-    }
 }

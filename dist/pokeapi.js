@@ -23,4 +23,17 @@ export class PokeAPI {
         const data = await result.json();
         return data;
     }
+    async fetchPokemons(locationArea) {
+        const fullUrl = `https://pokeapi.co/api/v2/location-area/${locationArea}`;
+        const cached = this.cache.get(fullUrl);
+        if (cached)
+            return cached.val;
+        const result = await fetch(fullUrl);
+        if (!result.ok) {
+            throw new Error(`HTTP error! status: ${result.status}`);
+        }
+        const data = await result.json();
+        this.cache.add(fullUrl, data);
+        return data;
+    }
 }
